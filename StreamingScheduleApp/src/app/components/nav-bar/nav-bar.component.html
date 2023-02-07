@@ -1,0 +1,38 @@
+<div class="navbar">
+  <ul class="container">
+    <li class="nav-item" id="item-1">
+      <a
+        class="nav-link go-to-home-navbar"
+        routerLinkActive="active"
+        [routerLink]="['/main']"
+        (click)="goToHome()"
+        >Home</a
+      >
+      <hr />
+    </li>
+
+    <li class="nav-item" id="item-2">
+      <a
+        class="nav-link go-to-today-tasks-navbar"
+        routerLinkActive="active"
+        [routerLink]="['/contact']"
+        (click)="goToContact()"
+        >Contact</a
+      >
+      <hr />
+    </li>
+    <li class="nav-item" id="item-3">
+      <button *ngIf="activeUser" class="logout" (click)="logout()">Logout</button>
+      <button *ngIf="!activeUser" class="login" (click)="login()">Login</button>
+    </li>
+    <li *ngIf="!activeUser" class="nav-item" id="item-4">
+      <a
+        class="nav-link go-to-profile-navbar"
+        routerLinkActive="active"
+        [routerLink]="['/dashboard']"
+        (click)="goToDashboard()"
+        >Dashboard</a
+      >
+    </li>
+  </ul>
+</div>

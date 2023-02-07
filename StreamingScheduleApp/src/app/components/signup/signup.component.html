@@ -1,0 +1,24 @@
+<div class="container">
+    <form id="signup-form" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <input placeholder="Name" formControlName="name" class="name-input" />
+      <input placeholder="Email" type="email" formControlName="email" />
+      <input
+        placeholder="Password"
+        type="password"
+        formControlName="password"
+        minlength="6"
+      />
+      <div>
+      </div>
+      <button type="submit" class="sgn-btn">Sign up</button>
+      <p *ngIf="displayValidationMessage" class="validation-message red-text">
+        Please fill out all the fields!
+      </p>
+    </form>
+  
+    <p>
+      Already a member?
+      <span class="link-text" (click)="switchToLogin()">Login</span>
+    </p>
+  </div>
+  

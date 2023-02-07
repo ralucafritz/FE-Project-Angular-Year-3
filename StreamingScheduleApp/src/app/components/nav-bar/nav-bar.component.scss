@@ -1,0 +1,75 @@
+@import url("https://fonts.googleapis.com/css2?family=Itim&display=swap");
+
+.navbar {
+  display: flex;
+  flex-direction: row;
+}
+
+hr {
+  display: none;
+}
+
+ul {
+  list-style-type: none;
+}
+
+button,
+span,
+li {
+  font-family: "Itim", itim;
+  font-size: 24px;
+  color: white;
+}
+
+li,
+button {
+  cursor: pointer;
+  border: none;
+}
+
+.login,
+.logout {
+  color: rgb(224, 156, 255);
+  transition: 0.5s;
+}
+
+.login:hover,
+.logout:hover {
+  color: orange;
+}
+
+li:hover {
+  color: orange;
+}
+
+.active {
+  color: blueviolet;
+  transition: 0.5s;
+}
+
+.active:hover {
+  color: orange;
+}
+
+.nav-link,
+.container {
+  align-items: center;
+  flex-direction: row;
+  display: flex;
+}
+
+.nav-item {
+  padding: 0px 10px 0px 10px;
+}
+
+a,
+a:hover,
+a:focus,
+a:active {
+  color: inherit;
+  font-size: 24px;
+}
+
+a:hover {
+  text-decoration: none;
+}

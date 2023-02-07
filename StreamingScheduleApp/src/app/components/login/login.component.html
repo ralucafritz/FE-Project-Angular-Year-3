@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="right-side">
+      <img class="logo-image" src="../../../assets/images/logo.png" />
+  
+      <form id="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <input placeholder="Email" type="email" formControlName="email" />
+        <input
+          placeholder="Password"
+          type="password"
+          formControlName="password"
+          minlength="6"
+        />
+        <div *ngIf="isLoading">
+        </div>
+        <button type="submit" (click)="onSubmit()" *ngIf="!isLoading">
+          Log me in
+        </button>
+        <p *ngIf="displayValidationMessage" class="validation-message red-text">
+          Please fill out all the fields!
+        </p>
+      </form>
+  
+      <p>
+        Go back to
+        <span class="link-text" (click)="switchToSignUp()">Sign up</span>
+      </p>
+    </div>
+  </div>
+  
