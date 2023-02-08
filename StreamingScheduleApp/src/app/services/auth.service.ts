@@ -1,21 +1,26 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
+import { Subject, of } from 'rxjs';
+import { NavBarComponent } from '../components/nav-bar/nav-bar.component';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  userLoggedIn: boolean;
-  constructor(private router: Router, private afAuth: AngularFireAuth) {
-    this.userLoggedIn = false;
+  loggedInObservable: Subject<boolean>;
 
-    this.afAuth.onAuthStateChanged((user) => {
-      if (user) {
-        this.userLoggedIn = true;
-      } else {
-        this.userLoggedIn = false;
-      }
+  constructor(private router: Router, private afAuth: AngularFireAuth) {
+    this.loggedInObservable = new Subject();
+  }
+
+  checkStatusLogin() {
+    const currentUser = this.afAuth.user;
+    currentUser.subscribe((value) => {
+      this.loggedInObservable.next(
+        value?.email !== null && value?.email !== undefined
+      );
+      console.log(value + "checkStatusLogin");
     });
   }
 
@@ -24,6 +29,7 @@ export class AuthService {
       .signInWithEmailAndPassword(email, password)
       .then(() => {
         console.log('Auth Service: loginUser: success');
+        this.loggedInObservable.next(true);
       })
       .catch((error) => {
         if (
@@ -36,7 +42,16 @@ export class AuthService {
         } else {
           alert('Login failed. Please try again.');
         }
+        return { isValid: false };
       });
+  }
+
+  logoutUser() {
+    this.afAuth.signOut().then((value) => {
+      console.log(value + 'logoutValue');
+    });
+    localStorage.removeItem('user');
+    this.loggedInObservable.next(false);
   }
 
   signupUser(user: any): Promise<any> {
@@ -44,6 +59,7 @@ export class AuthService {
       .createUserWithEmailAndPassword(user.email, user.password)
       .then((result) => {
         let emailLower = user.email.toLowerCase();
+        this.loggedInObservable.next(true);
       })
       .catch((error) => {
         if (
@@ -56,6 +72,8 @@ export class AuthService {
         } else {
           alert('Signup failed. Please try again.');
         }
+        this.loggedInObservable.next(false);
+        return { isValid: false };
       });
   }
 }

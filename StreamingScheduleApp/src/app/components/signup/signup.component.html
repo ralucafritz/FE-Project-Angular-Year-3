@@ -1,24 +1,29 @@
-<div class="container">
-    <form id="signup-form" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-      <input placeholder="Name" formControlName="name" class="name-input" />
-      <input placeholder="Email" type="email" formControlName="email" />
-      <input
-        placeholder="Password"
-        type="password"
-        formControlName="password"
-        minlength="6"
-      />
-      <div>
-      </div>
-      <button type="submit" class="sgn-btn">Sign up</button>
-      <p *ngIf="displayValidationMessage" class="validation-message red-text">
-        Please fill out all the fields!
-      </p>
-    </form>
-  
-    <p>
-      Already a member?
-      <span class="link-text" (click)="switchToLogin()">Login</span>
+<div class="container grid justify-items-center min-w-full pt-12">
+  <h2 class="text-5xl text-slate-50">Create account</h2>
+  <form
+    id="signup-form"
+    class="items-center flex flex-col w-full pt-12 pr-96 pl-96 space-y-7"
+    [formGroup]="signupForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <input placeholder="Email" type="email" formControlName="email" />
+    <input
+      placeholder="Password"
+      type="password"
+      formControlName="password"
+      minlength="6"
+    />
+    <div></div>
+    <button type="submit" class="sgn-btn">Sign up</button>
+    <p *ngIf="displayValidationMessage" class="validation-message red-text">
+      Please fill out all the fields!
     </p>
-  </div>
-  
+  </form>
+
+  <p>
+    Already a member?
+    <span class="link-text cursor-pointer" (click)="switchToLogin()"
+      >Login</span
+    >
+  </p>
+</div>

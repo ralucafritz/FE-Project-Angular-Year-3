@@ -1,10 +1,10 @@
-<div class="navbar">
-  <ul class="container">
+<div class="navbar bg-slate-800 p-0 py-6 ring-1 ring-slate-900/5 shadow-xl">
+  <ul class="container items-center justify-center flex flex-row min-w-full">
     <li class="nav-item" id="item-1">
       <a
         class="nav-link go-to-home-navbar"
         routerLinkActive="active"
-        [routerLink]="['/main']"
+        [routerLink]="['/home']"
         (click)="goToHome()"
         >Home</a
       >
@@ -21,18 +21,26 @@
       >
       <hr />
     </li>
-    <li class="nav-item" id="item-3">
-      <button *ngIf="activeUser" class="logout" (click)="logout()">Logout</button>
-      <button *ngIf="!activeUser" class="login" (click)="login()">Login</button>
-    </li>
-    <li *ngIf="!activeUser" class="nav-item" id="item-4">
+    <li class="nav-item" id="item-4">
       <a
-        class="nav-link go-to-profile-navbar"
+        class="nav-link go-to-profile-navbar text-bold"
         routerLinkActive="active"
         [routerLink]="['/dashboard']"
         (click)="goToDashboard()"
         >Dashboard</a
       >
+    </li>
+    <li class="nav-item" id="item-3">
+      <button *ngIf="userLoggedIn" class="logout" (click)="logout()">
+        Logout
+      </button>
+
+      <button class="login" *ngIf="!userLoggedIn" (click)="login()">
+        Login
+      </button>
+    </li>
+    <li>
+      <p *ngIf="userLoggedIn" class="text-bold pl-20">Hello, {{ userName }}!</p>
     </li>
   </ul>
 </div>

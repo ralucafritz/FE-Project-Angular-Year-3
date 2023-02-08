@@ -13,9 +13,10 @@ import { ContactComponent } from './components/contact/contact.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
-  declarations: [AppComponent, NavBarComponent, HomeComponent, ContactComponent, DashboardComponent, LoginComponent, SignupComponent],
+  declarations: [AppComponent, NavBarComponent, HomeComponent, ContactComponent, DashboardComponent, LoginComponent, SignupComponent, FooterComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

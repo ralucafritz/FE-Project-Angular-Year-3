@@ -35,9 +35,10 @@ export class LoginComponent implements OnInit {
   async checkAutoLogin() {
     try {
       this.activeUser = (await this.afAuth.currentUser)?.email ?? null;
+      console.log(this.activeUser);
     } catch {}
     if (this.activeUser || localStorage.getItem('user')) {
-      this.router.navigate(['./main']);
+      this.router.navigate(['./home']);
       console.log('AutoLogin');
     }
   }
@@ -45,28 +46,24 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit() {
+    console.log("onSubmit login")
     if (this.loginForm.invalid) {
       this.displayValidationMessage = true;
-      this.isLoading = false;
       return;
     }
-    this.isLoading = true;
     this.displayValidationMessage = false;
     this.authService
       .loginUser(this.loginForm.value.email, this.loginForm.value.password)
       .then((result) => {
-        if (result == null) {
-        
+        if (!result) {
           let username = this.loginForm.value.email.replace(/[^a-z0-9]/gi, '');
           localStorage.setItem('user', username);
           this.router.navigate(['/home']);
         } else if (result.isValid == false) {
           this.firebaseErrorMessage = result.message;
           alert('Login error!');
-          this.isLoading = false;
         }
       });
-    this.isLoading = false;
   }
 
   switchToSignUp() {

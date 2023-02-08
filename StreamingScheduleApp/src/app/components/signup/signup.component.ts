@@ -67,13 +67,12 @@ export class SignupComponent implements OnInit {
             let username = this.signupForm.value.email.replace(/[^a-z0-9]/gi, '')
             await this.db.object('users/' + username + '/info').set(formData);
             localStorage.setItem("user", username);
-            // null is success, false means there was an error
             this.router.navigate(['../home']);
         }
           
         else if (result.isValid == false) {
           this.firebaseErrorMessage = result.message;
-          this.router.navigate(['../']);
+          this.router.navigate(['./signup']);
         }
       })
       .catch(() => {

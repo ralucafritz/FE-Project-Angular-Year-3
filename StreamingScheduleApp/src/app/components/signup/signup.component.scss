@@ -1,0 +1,12 @@
+input{
+    @apply rounded-full w-96 h-10 pl-10;
+}
+
+p{
+    @apply py-5 text-slate-50 text-xl;
+}
+
+button{
+    @apply text-slate-50 text-2xl rounded-full border-2 border-amber-900 pl-4 pr-4 bg-amber-900
+    transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-150 duration-300 ;
+}
