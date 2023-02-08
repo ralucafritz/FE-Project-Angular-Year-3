@@ -9,7 +9,9 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['Itim', ...defaultTheme.fontFamily.sans],
-      }
+      },
+      backgroundImage: {
+       }
     },
   },
   plugins: [

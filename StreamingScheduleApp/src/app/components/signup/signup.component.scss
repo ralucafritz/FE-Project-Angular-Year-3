@@ -1,12 +1,13 @@
-input{
-    @apply rounded-full w-96 h-10 pl-10;
+input {
+  @apply rounded-full w-96 h-10 pl-10;
 }
 
-p{
-    @apply py-5 text-slate-50 text-xl;
+p {
+  @apply text-slate-50 text-xl;
 }
 
-button{
-    @apply text-slate-50 text-2xl rounded-full border-2 border-amber-900 pl-4 pr-4 bg-amber-900
-    transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-150 duration-300 ;
+button {
+  @apply text-slate-50 text-2xl rounded border-2 border-amber-900 pl-4 pr-4 bg-amber-900
+  hover:bg-amber-700  hover:border-amber-700 focus:ring-2 focus:ring-offset-2 focus:ring-amber-700 
+    transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-125 duration-300;
 }

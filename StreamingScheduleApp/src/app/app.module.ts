@@ -25,6 +25,6 @@ import { FooterComponent } from './components/footer/footer.component';
     AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [],
-  bootstrap: [AppComponent, NavBarComponent],
+  bootstrap: [AppComponent, NavBarComponent, FooterComponent],
 })
 export class AppModule {}

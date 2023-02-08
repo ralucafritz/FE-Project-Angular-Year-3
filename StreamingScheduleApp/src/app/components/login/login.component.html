@@ -13,19 +13,18 @@
       formControlName="password"
       minlength="6"
     />
-    <div *ngIf="isLoading"></div>
-    <button type="submit">
-      Log me in
-    </button>
-    <p *ngIf="displayValidationMessage" class="validation-message red-text">
+    <button type="submit">Log me in</button>
+    <p *ngIf="displayValidationMessage" class="validation-message">
       Please fill out all the fields!
     </p>
   </form>
 
+  <p class="mt-2">Not a member?</p>
   <p>
-    Go back to
-    <span class="link-text cursor-pointer" (click)="switchToSignUp()"
-      >Sign up</span
+    <span
+      class="underline cursor-pointer hover:text-2xl"
+      (click)="switchToSignUp()"
+      >Sign Up</span
     >
   </p>
 </div>

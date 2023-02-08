@@ -1,5 +1,5 @@
 <div class="container grid justify-items-center min-w-full pt-12">
-  <h2 class="text-5xl text-slate-50">Create account</h2>
+  <h2 class="text-5xl text-slate-50">Create an account</h2>
   <form
     id="signup-form"
     class="items-center flex flex-col w-full pt-12 pr-96 pl-96 space-y-7"
@@ -13,16 +13,16 @@
       formControlName="password"
       minlength="6"
     />
-    <div></div>
-    <button type="submit" class="sgn-btn">Sign up</button>
-    <p *ngIf="displayValidationMessage" class="validation-message red-text">
+    <button type="submit">Sign up</button>
+    <p *ngIf="displayValidationMessage" class="validation-message">
       Please fill out all the fields!
     </p>
   </form>
 
+  <p class="mt-2">
+    Already a member? </p>
   <p>
-    Already a member?
-    <span class="link-text cursor-pointer" (click)="switchToLogin()"
+    <span class="underline cursor-pointer hover:text-2xl" (click)="switchToLogin()"
       >Login</span
     >
   </p>
