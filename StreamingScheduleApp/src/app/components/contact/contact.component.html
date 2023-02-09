@@ -1,51 +1,82 @@
-<div class="">
-  <div class="w-full flex items-center justify-center">
+<div class="m-5 w-full flex items-center justify-center fixed z-50">
+  <div *ngIf="needAlert && showAlert" class="w-96" role="alert">
+    <div class="bg-green-500 text-white uppercase font-bold rounded-t px-4 py-2">
+      <p class="font-bold">Successful</p>
+    </div>
     <div
-      class="absolute top-32 bg-zinc-800/50 backdrop-blur-md shadow rounded py-10 lg:px-28 px-8"
+      class="border border-t-0 border-green-400 rounded-b bg-green-100 px-4 py-3 text-green-700"
+    >
+      <p class="text-sm">Your message has been sent succesfully.</p>
+    </div>
+  </div>
+
+  <div *ngIf="needAlert && !showAlert" class="w-96" role="alert">
+    <div class="bg-red-500 text-white uppercase font-bold rounded-t px-4 py-2">
+      Error
+    </div>
+    <div
+      class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700"
+    >
+      <p>Something went wrong.</p>
+    </div>
+  </div>
+</div>
+
+<div class="py-20">
+  <div class="w-full flex items-center justify-center ">
+    <div
+      class="top-32 bg-zinc-800/50 backdrop-blur-md shadow rounded py-10 lg:px-28 px-8"
     >
       <p class="text-3xl font-bold text-center text-gray-50">Contact us</p>
-      <div class="md:flex items-center mt-12">
-        <div class="md:w-72 flex flex-col">
-          <label class="text-xl text-gray-50">Name</label>
-          <input
-            tabindex="0"
-            arial-label="Please input name"
-            type="name"
-            class="text-gray-900 p-3 focus:oultine-none focus:border-indigo-700 mt-4 bg-gray-100 border rounded border-gray-200 placeholder-gray-500"
-            placeholder="Please input  name"
-          />
+      <form [formGroup]="addContactForm" (ngSubmit)="addContact()">
+        <div class="md:flex items-center mt-12">
+          <div class="md:w-72 flex flex-col">
+            <label class="text-xl text-gray-50">Name</label>
+            <input
+              tabindex="0"
+              arial-label="Please input name"
+              type="text"
+              formControlName="username"
+              class="text-gray-900 p-3 focus:oultine-none focus:border-indigo-700 mt-4 bg-gray-100 border rounded border-gray-200 placeholder-gray-500"
+              placeholder="Please input  name"
+              minlength="4"
+            />
+          </div>
+          <div class="md:w-72 flex flex-col md:ml-6 md:mt-0 mt-4">
+            <label class="text-xl text-gray-50">Email Address</label>
+            <input
+              tabindex="0"
+              arial-label="Please input email address"
+              formControlName="email"
+              type="email"
+              class="text-gray-900 p-3 focus:oultine-none focus:border-indigo-700 mt-4 bg-gray-100 border rounded border-gray-200 placeholder-gray-500"
+              placeholder="Please input email address"
+            />
+          </div>
         </div>
-        <div class="md:w-72 flex flex-col md:ml-6 md:mt-0 mt-4">
-          <label class="text-xl text-gray-50">Email Address</label>
-          <input
-            tabindex="0"
-            arial-label="Please input email address"
-            type="name"
-            class="text-gray-900 p-3 focus:oultine-none focus:border-indigo-700 mt-4 bg-gray-100 border rounded border-gray-200 placeholder-gray-500"
-            placeholder="Please input email address"
-          />
+        <div>
+          <div class="w-full flex flex-col mt-8">
+            <label class="text-xl text-gray-50">Message</label>
+            <textarea
+              tabindex="0"
+              aria-label="leave a message"
+              role="textbox"
+              type="text"
+              formControlName="message"
+              minlength="25"
+              class="h-52 text-gray-900 p-3 focus:oultine-none focus:border-indigo-700 mt-4 bg-gray-100 border rounded border-gray-200 placeholder-gray-500"
+              placeholder="Please input your message"
+            ></textarea>
+          </div>
         </div>
-      </div>
-      <div>
-        <div class="w-full flex flex-col mt-8">
-          <label class="text-xl text-gray-50">Message</label>
-          <textarea
-            tabindex="0"
-            aria-label="leave a message"
-            role="textbox"
-            type="name"
-            class="h-52 text-gray-900 p-3 focus:oultine-none focus:border-indigo-700 mt-4 bg-gray-100 border rounded border-gray-200 placeholder-gray-500"
-            placeholder="Please input your message"
-          ></textarea>
+        <div class="flex items-center justify-center w-full">
+          <button
+            class="mt-9 uppercase text-xl font-semibold text-white py-4 px-10 bg-indigo-700 rounded hover:bg-indigo-600 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:outline-none transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
+          >
+            Submit Message
+          </button>
         </div>
-      </div>
-      <div class="flex items-center justify-center w-full">
-        <button
-          class="mt-9 text-xl font-semibold text-white py-4 px-10 bg-indigo-700 rounded hover:bg-indigo-600 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:outline-none transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
-        >
-          SUBMIT
-        </button>
-      </div>
+      </form>
     </div>
   </div>
 </div>
