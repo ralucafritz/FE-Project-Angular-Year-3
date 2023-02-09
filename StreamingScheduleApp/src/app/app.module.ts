@@ -14,15 +14,17 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { TimepickerComponent } from './components/timepicker/timepicker.component';
+
 
 @NgModule({
-  declarations: [AppComponent, NavBarComponent, HomeComponent, ContactComponent, DashboardComponent, LoginComponent, SignupComponent, FooterComponent],
+  declarations: [AppComponent, NavBarComponent, HomeComponent, ContactComponent, DashboardComponent, LoginComponent, SignupComponent, FooterComponent, TimepickerComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    AngularFireModule.initializeApp(environment.firebase)
+    AngularFireModule.initializeApp(environment.firebase),  
   ],
   providers: [],
   bootstrap: [AppComponent, NavBarComponent, FooterComponent],

@@ -1,1 +1,53 @@
-<p>dashboard works!</p>
+<div class="w-full flex items-center justify-center">
+  <div
+    class="absolute top-32 bg-zinc-800/50 backdrop-blur-md shadow rounded py-10 lg:px-28 px-8"
+  >
+    <p class="text-3xl font-bold text-center text-gray-50">Add a new stream</p>
+    <form [formGroup]="addStreamForm" (ngSubmit)="addStream()">
+      <div class="mt-5">
+        <div class="md:w-72 flex flex-col">
+          <div class="form-group">
+            <label class="text-xl text-gray-50" for="streamerName"
+              >Streamer Name</label
+            >
+            <input
+              type="text"
+              class="form-control w-96"
+              id="streamerName"
+              formControlName="streamerName"
+              placeholder="Please input the streamer name"
+              name="streamerName"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-center mt-5">
+        <div class="form-group">
+          <label class="text-xl text-gray-50" for="streamDescription"
+            >Stream description</label
+          >
+          <div>
+            <textarea
+              tabindex="0"
+              aria-label="leave a message"
+              id="streamDescription"
+              role="textbox"
+              type="text"
+              class="form-control w-96 h-52 text-gray-900 p-3 focus:oultine-none focus:border-indigo-700 bg-gray-100 border rounded border-gray-200 placeholder-gray-500"
+              placeholder="Please input the stream description"
+              formControlName="streamDescription"
+              name="streamDescription"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="flex items-center justify-center w-full">
+        <button
+          class="mt-9 text-xl font-semibold text-white py-4 px-10 bg-indigo-700 rounded hover:bg-indigo-600 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:outline-none transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
+        >
+          SUBMIT
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
