@@ -1,1 +1,45 @@
-<p class="font-bold">home works!</p>
+<div class="py-5 mb-20 relative">
+  <h2 class="text-[40px] text-center text-gray-50 font-bold mb-5 uppercase">
+    Future Streams
+  </h2>
+  <div class="flex justify-center text-xl mt-2 ">
+    <ol>
+      <div *ngIf="haveStreams">
+        <div>
+          <li class="border-l-2 border-pink-500" *ngFor="let key of keyArray">
+            <div class="md:flex flex-start">
+              <div
+                class="bg-pink-600 w-6 h-6 flex items-center justify-center rounded-full -ml-3.5"
+              >
+                <i class="w-5 h-5 text-gray-50 fa-solid fa-tower-broadcast"></i>
+              </div>
+              <div
+                class="block p-6 rounded-lg shadow-lg bg-gray-700/70 max-w-md ml-6 mb-10"
+              >
+                <div class="flex justify-between mb-4 ">
+                  <a
+                    class="text-2xl font-medium uppercase text-purple-600 hover:text-purple-700 focus:text-purple-800 duration-300 transition ease-in-out text-sm"
+                    >{{ allStreams[key].streams.streamerName }}</a
+                  >
+                
+                </div>
+                <p class="text-gray-50 mb-6">
+                  {{ allStreams[key].streams.streamDescription }}
+                </p>
+                <button
+                  type="button"
+                  class="inline-block px-4 py-1.5 bg-purple-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-800 active:shadow-lg transition duration-150 ease-in-out"
+                  data-mdb-ripple="true"
+                  (click)="goToStreamLink(allStreams[key].streams.streamerName)"
+                >
+                  <i class="fab fa-twitch"></i>
+                  WATCH STREAM
+                </button>
+              </div>
+            </div>
+          </li>
+        </div>
+      </div>
+    </ol>
+  </div>
+</div>
