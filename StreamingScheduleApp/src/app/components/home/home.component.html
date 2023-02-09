@@ -1,6 +1,7 @@
 <div class="py-5 mb-20 relative">
+  <app-nav-bar [noUpcomingStreams]="noUpcomingStreams" class="hidden"></app-nav-bar>
   <h2 class="text-[40px] text-center text-gray-50 font-bold mb-5 uppercase">
-    Future Streams
+    Upcoming Streams
   </h2>
   <div class="flex justify-center text-xl mt-2 ">
     <ol>
@@ -21,7 +22,7 @@
                     class="text-2xl font-medium uppercase text-purple-600 hover:text-purple-700 focus:text-purple-800 duration-300 transition ease-in-out text-sm"
                     >{{ allStreams[key].streams.streamerName }}</a
                   >
-                
+                  <span class="text-gray-50 cursor-pointer " (click)="deleteStream(key)">X</span>
                 </div>
                 <p class="text-gray-50 mb-6">
                   {{ allStreams[key].streams.streamDescription }}

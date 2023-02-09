@@ -1,5 +1,5 @@
-<div class="bg-slate-900/60 py-3">
-  <ul class="container items-center justify-center flex flex-row min-w-full">
+<div class="bg-slate-900/60">
+  <ul class="container items-center  justify-center flex min-w-full">
     <li class="nav-item" id="item-1">
       <a
         class="nav-link go-to-home-navbar"
@@ -40,7 +40,13 @@
       </button>
     </li>
     <li>
-      <p *ngIf="userLoggedIn" class="text-bold pl-20">Hello, {{ userName }}!</p>
+      <p
+        *ngIf="userLoggedIn"
+        class="items-center text-bold text-sm flex-shrink-0"
+      >
+        Hello, {{ userName }}! There are {{ noStreams }} streams waiting
+        for you!
+      </p>
     </li>
   </ul>
 </div>
