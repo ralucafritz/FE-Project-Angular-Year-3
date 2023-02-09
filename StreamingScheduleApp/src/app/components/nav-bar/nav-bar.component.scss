@@ -1,24 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Itim&display=swap");
 
-.navbar {
-  display: flex;
-  flex-direction: row;
-}
 
 hr {
   display: none;
 }
 
-ul {
-  list-style-type: none;
-}
-
 button,
 p,
 li {
-  font-family: "Itim", itim;
-  font-size: 24px;
-  color: white;
+  @apply text-[24px] text-gray-50;
 }
 
 .login,
@@ -37,5 +27,5 @@ li:hover {
 }
 
 .nav-item {
-  padding: 0px 10px 0px 10px;
+  @apply mr-5;
 }
