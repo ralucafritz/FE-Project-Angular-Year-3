@@ -40,8 +40,7 @@ export class DashboardComponent implements OnInit {
 
       this.db
       .list('streamList').push({ streams: addStreamFormData });
-      console.log('sent to db');
-      console.log(addStreamFormData);
+      console.log('stream details sent to db');
     } else {
       return;
     }
