@@ -1,0 +1,15 @@
+<div class="flex justify-center">
+    <div class="relative">
+      <select class="form-select" [(ngModel)]="selectedHour" (ngModelChange)="updateTime()">
+        <option *ngFor="let hour of hours" [value]="hour">{{ hour }}</option>
+      </select>
+      <span class="select-arrow"></span>
+    </div>
+    <span class="text-2xl mx-4">:</span>
+    <div class="relative">
+      <select class="form-select" [(ngModel)]="selectedMinute" (ngModelChange)="updateTime()">
+        <option *ngFor="let minute of minutes" [value]="minute">{{ minute }}</option>
+      </select>
+      <span class="select-arrow"></span>
+    </div>
+  </div>
