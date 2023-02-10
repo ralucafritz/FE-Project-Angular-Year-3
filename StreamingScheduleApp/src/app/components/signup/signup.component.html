@@ -6,7 +6,7 @@
     [formGroup]="signupForm"
     (ngSubmit)="onSubmit()"
   >
-    <input placeholder="Email" type="email" formControlName="email" />
+    <input placeholder="Email" type="email" formControlName="email" minlength="11"/>
     <input
       placeholder="Password"
       type="password"

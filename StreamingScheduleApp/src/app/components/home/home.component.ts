@@ -5,8 +5,6 @@ import { Stream } from 'src/types';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  template:
-    '<app-nav-bar [noUpcomingStreams]="noUpcomingStreams" class="hidden"></app-nav-bar>',
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
@@ -14,7 +12,6 @@ export class HomeComponent implements OnInit {
   allStreams!: Record<any, any>;
   haveStreams: boolean = false;
   keyArray: string[] = [];
-  noUpcomingStreams: number = 0;
 
   constructor(private db: AngularFireDatabase) {}
 
@@ -25,9 +22,7 @@ export class HomeComponent implements OnInit {
       .then((values) => {
         this.allStreams = values.val() as Record<any, any>;
         this.keyArray = Object.keys(this.allStreams);
-        this.noUpcomingStreams = this.keyArray.length;
-        console.log(this.noUpcomingStreams);
-        console.log(values.val());
+        console.log(this.allStreams);
         this.haveStreams = true;
       });
   }
@@ -37,19 +32,14 @@ export class HomeComponent implements OnInit {
   }
 
   deleteStream(key: any) {
-    this.db
-      .list('streamList')
-      .query.get()
-      .then((values) => {
-        this.keyArray = Object.keys(this.allStreams);
-        this.keyArray.forEach((element) => {
-          if (values.val() === key) {
-          }
-        });
-      });
+    this.db.list('streamList').remove(key)
+    .then(() => {
+      console.log('Stream deleted successfully!');
+      window.location.reload();
+    })
+    .catch((error) => {
+      console.error(error);
+    });
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    console.log(changes + "home");
-  }
 }

@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8" />
     <title>StreamingScheduleApp</title>
+    <link rel="icon" type="image/png" href="favicon.png" />
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <link href="/dist/output.css" rel="stylesheet" />
     <script
       src="https://kit.fontawesome.com/8dc8035c8f.js"
@@ -13,16 +13,10 @@
     ></script>
   </head>
   <body
-    class="bg-gradient-to-b from-slate-700 via-indigo-500 to-orange-400 min-w-screen min-h-screen overflow-x-hidden"
+    class="bg-gradient-to-b from-slate-700 via-indigo-500 to-orange-400 min-w-screen min-h-screen overflow-x-hidden flex flex-col"
   >
-    <div class="block">
-      <app-nav-bar></app-nav-bar>
-      <div class="min-h-full">
-        <app-root></app-root>
-      </div>
-    </div>
-    <div class="fixed bottom-0 left-0 right-0">
-      <app-footer></app-footer>
-    </div>
+    <app-nav-bar></app-nav-bar>
+    <app-root class="flex-1"></app-root>
+    <app-footer></app-footer>
   </body>
 </html>

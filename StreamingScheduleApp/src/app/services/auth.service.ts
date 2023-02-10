@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { Subject, of } from 'rxjs';
-import { NavBarComponent } from '../components/nav-bar/nav-bar.component';
 
 @Injectable({
   providedIn: 'root',
@@ -49,6 +48,7 @@ export class AuthService {
   logoutUser() {
     this.afAuth.signOut().then((value) => {
       console.log(value + 'logoutValue');
+      this.router.navigate(['./login']);
     });
     localStorage.removeItem('user');
     this.loggedInObservable.next(false);
