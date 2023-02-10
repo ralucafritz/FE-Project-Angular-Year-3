@@ -15,10 +15,11 @@ import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { TimepickerComponent } from './components/timepicker/timepicker.component';
+import { AlertsComponent } from './components/alerts/alerts.component';
 
 
 @NgModule({
-  declarations: [AppComponent, NavBarComponent, HomeComponent, ContactComponent, DashboardComponent, LoginComponent, SignupComponent, FooterComponent, TimepickerComponent],
+  declarations: [AppComponent, NavBarComponent, HomeComponent, ContactComponent, DashboardComponent, LoginComponent, SignupComponent, FooterComponent, TimepickerComponent, AlertsComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

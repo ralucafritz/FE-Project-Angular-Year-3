@@ -15,7 +15,8 @@ export class ContactComponent implements OnInit {
   email = '';
   message = '';
   needAlert = false;
-  showAlert = false;
+  isSuccessful = false;
+  alertMessage: string = "";
 
   constructor(
     private db: AngularFireDatabase,
@@ -45,10 +46,11 @@ export class ContactComponent implements OnInit {
 
       this.db.list('contact').push({ messages: addContactFormData });
       console.log('contact sent to DB');
-      this.showAlert = true;
+      this.isSuccessful = true;
       this.triggerAlert();
+      this.addContactForm.reset();
     } else {
-      this.showAlert = false;
+      this.isSuccessful = false;
       this.triggerAlert();
       return;
     }
@@ -56,9 +58,20 @@ export class ContactComponent implements OnInit {
 
   triggerAlert() {
     this.needAlert = true;
+    this.setAlertMessage();
     setTimeout(() => {
       this.needAlert = false;
     }, 30000);
+  }
+
+  setAlertMessage(){
+    if(this.isSuccessful)
+    {
+      this.alertMessage = "Your message has been sent succesfully."
+    }else
+    {
+      this.alertMessage = "Something went wrong."
+    }
   }
 
   refresh() {

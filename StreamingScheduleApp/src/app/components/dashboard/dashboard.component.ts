@@ -15,6 +15,9 @@ export class DashboardComponent implements OnInit {
   allStreams!: Stream[];
   streamerName = '';
   streamDescription = '';
+  needAlert = false;
+  isSuccessful = false;
+  alertMessage: string = "";
 
   constructor(
     private db: AngularFireDatabase,
@@ -41,8 +44,31 @@ export class DashboardComponent implements OnInit {
       this.db
       .list('streamList').push({ streams: addStreamFormData });
       console.log('stream details sent to db');
+      this.isSuccessful = true;
+      this.triggerAlert();
+      this.addStreamForm.reset();
     } else {
+      this.isSuccessful = false;
+      this.triggerAlert();
       return;
+    }
+  }
+
+  triggerAlert() {
+    this.needAlert = true;
+    this.setAlertMessage();
+    setTimeout(() => {
+      this.needAlert = false;
+    }, 30000);
+  }
+
+  setAlertMessage(){
+    if(this.isSuccessful)
+    {
+      this.alertMessage = "The stream has been added succesfully."
+    }else
+    {
+      this.alertMessage = "Something went wrong."
     }
   }
 }

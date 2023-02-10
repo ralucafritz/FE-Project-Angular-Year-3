@@ -13,11 +13,16 @@
     ></script>
   </head>
   <body
-    class="bg-gradient-to-b from-slate-700 via-indigo-500 to-orange-400 min-w-full min-h-screen overflow-x-hidden"
+    class="bg-gradient-to-b from-slate-700 via-indigo-500 to-orange-400 min-w-screen min-h-screen overflow-x-hidden"
   >
-    <app-nav-bar></app-nav-bar>
-    <app-root></app-root>
-    <app-footer></app-footer>
+    <div class="block">
+      <app-nav-bar></app-nav-bar>
+      <div class="min-h-full">
+        <app-root></app-root>
+      </div>
+    </div>
+    <div class="fixed bottom-0 left-0 right-0">
+      <app-footer></app-footer>
+    </div>
   </body>
-  
 </html>

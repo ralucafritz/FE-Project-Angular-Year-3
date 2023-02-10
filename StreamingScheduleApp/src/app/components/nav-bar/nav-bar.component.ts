@@ -31,14 +31,21 @@ export class NavBarComponent implements OnInit {
   ) {
     this.userLoggedIn = false;
     this.userName = '';
-    this.noUpcomingStreams = 0;
+    this.noUpcomingStreams = -1;
   }
 
   ngOnInit(): void {
     this.getStarted();
     this.authService.loggedInObservable.subscribe((subscriber) => {
       this.changeStatus(subscriber);
-      this.noStreams = this.noUpcomingStreams;
+      setTimeout(() => {
+        if(this.noUpcomingStreams!=-1)
+        {
+          this.noStreams = this.noUpcomingStreams;
+          console.log(this.noUpcomingStreams + " noUpcomingStreams navBar");
+          console.log(this.noStreams + " noStreams");
+        }
+      }, 1000);
       console.log('subscriberNavBar called + ' + subscriber);
     });
     this.authService.checkStatusLogin();
@@ -56,6 +63,8 @@ export class NavBarComponent implements OnInit {
     }
     console.log('changeStatus called + ' + this.userLoggedIn);
   }
+
+
 
   async getStarted() {
     var details: string[];
@@ -99,9 +108,6 @@ export class NavBarComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if(this.noStreams!== this.noUpcomingStreams) {
-      this.noStreams = this.noUpcomingStreams;
-    }
     console.log(changes + " changes nav-bar");
   }
 }
