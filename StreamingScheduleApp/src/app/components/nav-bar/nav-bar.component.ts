@@ -2,27 +2,17 @@ import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { Observable, of, timeInterval, timeout } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
-  template: `<p
-    *ngIf="userLoggedIn"
-    class="items-center text-bold text-sm flex-shrink-0"
-  >
-    Hello, {{ userName }}! There are {{ noUpcomingStreams }} streams waiting for
-    you!
-  </p>`,
   styleUrls: ['./nav-bar.component.scss'],
 })
 export class NavBarComponent implements OnInit {
   public userLoggedIn: boolean;
   public userName: string | null;
-  @Input() noUpcomingStreams: number;
-  noStreams = 0;
-
   constructor(
     public afAuth: AngularFireAuth,
     private router: Router,
@@ -31,21 +21,12 @@ export class NavBarComponent implements OnInit {
   ) {
     this.userLoggedIn = false;
     this.userName = '';
-    this.noUpcomingStreams = -1;
   }
 
   ngOnInit(): void {
     this.getStarted();
     this.authService.loggedInObservable.subscribe((subscriber) => {
-      this.changeStatus(subscriber);
-      setTimeout(() => {
-        if(this.noUpcomingStreams!=-1)
-        {
-          this.noStreams = this.noUpcomingStreams;
-          console.log(this.noUpcomingStreams + " noUpcomingStreams navBar");
-          console.log(this.noStreams + " noStreams");
-        }
-      }, 1000);
+      this.changeStatus(subscriber); 
       console.log('subscriberNavBar called + ' + subscriber);
     });
     this.authService.checkStatusLogin();
@@ -63,8 +44,6 @@ export class NavBarComponent implements OnInit {
     }
     console.log('changeStatus called + ' + this.userLoggedIn);
   }
-
-
 
   async getStarted() {
     var details: string[];
@@ -88,7 +67,6 @@ export class NavBarComponent implements OnInit {
   logout(): void {
     console.log('LoggedOut');
     this.authService.logoutUser();
-    this.router.navigate(['./home']);
   }
 
   login(): void {
@@ -107,7 +85,4 @@ export class NavBarComponent implements OnInit {
     this.router.navigate(['./home']);
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    console.log(changes + " changes nav-bar");
-  }
 }
