@@ -19,7 +19,7 @@ export class AuthService {
       this.loggedInObservable.next(
         value?.email !== null && value?.email !== undefined
       );
-      console.log(value + "checkStatusLogin");
+      console.log(value + 'checkStatusLogin');
     });
   }
 
@@ -38,8 +38,10 @@ export class AuthService {
           error.code == 'auth/invalid-email'
         ) {
           alert('Invalid credentials. Please try again.');
+          console.error(error.code);
         } else {
           alert('Login failed. Please try again.');
+          console.error(error.code);
         }
         return { isValid: false };
       });
@@ -59,7 +61,9 @@ export class AuthService {
       .createUserWithEmailAndPassword(user.email, user.password)
       .then((result) => {
         let emailLower = user.email.toLowerCase();
+        localStorage.setItem("user", emailLower.slice(0,4));
         this.loggedInObservable.next(true);
+        console.log("account created");
       })
       .catch((error) => {
         if (
@@ -67,10 +71,14 @@ export class AuthService {
           error.code == 'auth/email-already-in-use'
         ) {
           alert('Email already used.');
+          console.error(error.code);
         } else if (error.code == 'auth/invalid-email') {
           alert('Invalid email. Please try again.');
+          console.error(error.code);
         } else {
           alert('Signup failed. Please try again.');
+
+          console.error(error.code);
         }
         this.loggedInObservable.next(false);
         return { isValid: false };
