@@ -63,7 +63,7 @@ export class DashboardComponent implements OnInit {
     if (this.isSuccessful) {
       this.alertMessage = 'The stream has been added succesfully.';
     } else {
-      this.alertMessage = 'Something went wrong.';
+      this.alertMessage = 'Minimum 25 characters required for the description';
     }
     this.needAlert = true;
   }
