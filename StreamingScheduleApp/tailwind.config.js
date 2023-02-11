@@ -1,21 +1,18 @@
 /** @type {import('tailwindcss').Config} */
-const defaultTheme = require('tailwindcss/defaultTheme')
+const defaultTheme = require("tailwindcss/defaultTheme");
 module.exports = {
-  content: [
-    "./src/**/*.{html,scss,ts}",
-  ],
+  content: ["./src/**/*.{html,scss,ts}"],
   important: true,
   theme: {
     extend: {
-      fontFamily: {
-        sans: ['Itim', ...defaultTheme.fontFamily.sans],
+      colors: {
+        navbarColor: "#1F283F",
       },
-      backgroundImage: {
-       }
+      fontFamily: {
+        sans: ["Itim", ...defaultTheme.fontFamily.sans],
+      },
     },
   },
-  plugins: [
-    require('@tailwindcss/forms')
-  ],
-  darkMode: 'class'
-}
+  plugins: [require("@tailwindcss/forms"), require("tailwind-scrollbar")],
+  darkMode: "class",
+};
