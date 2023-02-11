@@ -57,14 +57,6 @@ export class ContactComponent implements OnInit {
   }
 
   triggerAlert() {
-    this.needAlert = true;
-    this.setAlertMessage();
-    setTimeout(() => {
-      this.needAlert = false;
-    }, 30000);
-  }
-
-  setAlertMessage(){
     if(this.isSuccessful)
     {
       this.alertMessage = "Your message has been sent succesfully."
@@ -72,6 +64,7 @@ export class ContactComponent implements OnInit {
     {
       this.alertMessage = "Something went wrong."
     }
+    this.needAlert = true;
   }
 
   refresh() {

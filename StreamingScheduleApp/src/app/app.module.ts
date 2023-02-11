@@ -16,10 +16,11 @@ import { SignupComponent } from './components/signup/signup.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { TimepickerComponent } from './components/timepicker/timepicker.component';
 import { AlertsComponent } from './components/alerts/alerts.component';
-
+import { AuthErrorsHelperComponent } from './helpers/auth-errors-helper/auth-errors-helper.component';
+import { AlertsHelperComponent } from './helpers/alerts-helper/alerts-helper.component';
 
 @NgModule({
-  declarations: [AppComponent, NavBarComponent, HomeComponent, ContactComponent, DashboardComponent, LoginComponent, SignupComponent, FooterComponent, TimepickerComponent, AlertsComponent],
+  declarations: [AppComponent, NavBarComponent, HomeComponent, ContactComponent, DashboardComponent, LoginComponent, SignupComponent, FooterComponent, TimepickerComponent, AlertsComponent, AuthErrorsHelperComponent, AlertsHelperComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

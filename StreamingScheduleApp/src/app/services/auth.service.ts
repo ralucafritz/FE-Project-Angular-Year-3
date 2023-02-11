@@ -8,6 +8,8 @@ import { Subject, of } from 'rxjs';
 })
 export class AuthService {
   loggedInObservable: Subject<boolean>;
+  private errorMessageSubject = new Subject<string>();
+  errorMessage$ = this.errorMessageSubject.asObservable();
 
   constructor(private router: Router, private afAuth: AngularFireAuth) {
     this.loggedInObservable = new Subject();
@@ -29,6 +31,7 @@ export class AuthService {
       .then(() => {
         console.log('Auth Service: loginUser: success');
         this.loggedInObservable.next(true);
+        this.router.navigate(['./home']);
       })
       .catch((error) => {
         if (
@@ -37,10 +40,10 @@ export class AuthService {
           error.code == 'auth/user-disabled' ||
           error.code == 'auth/invalid-email'
         ) {
-          alert('Invalid credentials. Please try again.');
+          this.errorMessageSubject.next('Invalid credentials. Please try again.');
           console.error(error.code);
         } else {
-          alert('Login failed. Please try again.');
+          this.errorMessageSubject.next('Login failed. Please try again.');
           console.error(error.code);
         }
         return { isValid: false };
@@ -60,24 +63,24 @@ export class AuthService {
     return this.afAuth
       .createUserWithEmailAndPassword(user.email, user.password)
       .then((result) => {
-        let emailLower = user.email.toLowerCase();
-        localStorage.setItem("user", emailLower.slice(0,4));
+        console.log('Auth Service: signUpUser: success');
         this.loggedInObservable.next(true);
-        console.log("account created");
+        let emailLower = user.email.toLowerCase();
+        localStorage.setItem('user', emailLower.slice(0, 4));
+        this.router.navigate(['./home']);
       })
       .catch((error) => {
         if (
           error.code == 'auth/account-exists-with-different-credential' ||
           error.code == 'auth/email-already-in-use'
         ) {
-          alert('Email already used.');
+          this.errorMessageSubject.next('Email already used.');
           console.error(error.code);
         } else if (error.code == 'auth/invalid-email') {
-          alert('Invalid email. Please try again.');
+          this.errorMessageSubject.next('Invalid email. Please try again.');
           console.error(error.code);
         } else {
-          alert('Signup failed. Please try again.');
-
+          this.errorMessageSubject.next('Signup failed. Please try again.');
           console.error(error.code);
         }
         this.loggedInObservable.next(false);

@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { TimepickerComponent } from '../timepicker/timepicker.component';
-import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { Stream } from 'src/types';
 import { StorageWrapper } from 'src/app/StorageWrapper';
@@ -62,18 +60,12 @@ export class DashboardComponent implements OnInit {
   }
 
   triggerAlert() {
-    this.needAlert = true;
-    this.setAlertMessage();
-    setTimeout(() => {
-      this.needAlert = false;
-    }, 30000);
-  }
-
-  setAlertMessage() {
     if (this.isSuccessful) {
       this.alertMessage = 'The stream has been added succesfully.';
     } else {
       this.alertMessage = 'Something went wrong.';
     }
+    this.needAlert = true;
   }
+    
 }

@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   public isLoading = false;
   public displayValidationMessage = false;
   activeUser: string | null;
+  errorMessage: string = '';
 
   constructor(
     private authService: AuthService,
@@ -60,8 +61,6 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('user', username);
           this.router.navigate(['/home']);
         } else if (result.isValid == false) {
-          this.firebaseErrorMessage = result.message;
-          alert('Login error!');
         }
       });
   }

@@ -2,7 +2,6 @@ import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { StorageWrapper } from 'src/app/StorageWrapper';
 import { AuthService } from 'src/app/services/auth.service';
-import { Stream } from 'src/types';
 
 @Component({
   selector: 'app-home',
@@ -17,17 +16,13 @@ export class HomeComponent implements OnInit {
   numberStreams: number = 0;
   storageWrapper: StorageWrapper = StorageWrapper.getInstance('numberStreams');
   userLoggedIn: boolean = false;
-
-
   constructor(
     private db: AngularFireDatabase,
     public authService: AuthService
   ) {}
 
   ngOnInit(): void {
-    console.log(`${this.userLoggedIn} LOGGED IN_________________________________`);
-
-    this.db
+      this.db
       .list('streamList')
       .query.get()
       .then((values) => {

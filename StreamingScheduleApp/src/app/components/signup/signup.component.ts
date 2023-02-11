@@ -14,10 +14,11 @@ export class SignupComponent implements OnInit {
   public isLoading = false;
   public displayValidationMessage = false;
   public passValidationMessage = false;
-  public submitted=false;
+  public submitted = false;
   signupForm!: FormGroup;
   firebaseErrorMessage: string;
   activeUser: string | null;
+  errorMessage: string = '';
 
   constructor(
     private authService: AuthService,
@@ -43,7 +44,10 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {
     this.signupForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(6),
+      ]),
     });
   }
 
@@ -58,22 +62,18 @@ export class SignupComponent implements OnInit {
       name: this.signupForm.value.email.slice(0, 4),
     };
 
-    this.authService
-      .signupUser(this.signupForm.value)
-      .then(async (result) => {
-        if (result == null)
-        {
-            let username = this.signupForm.value.email.replace(/[^a-z0-9]/gi, '');
-            await this.db.object('users/' + username + '/info').set(formData);
-            this.router.navigate(['../home']);
-        }
-          
-        else if (result.isValid == false) {
-          this.firebaseErrorMessage = result.message;
-          this.router.navigate(['./signup']);
-        }
-      })
-
+    this.authService.signupUser(this.signupForm.value).then(async (result) => {
+      if (result == null) {
+        let username = this.signupForm.value.email.replace(/[^a-z0-9]/gi, '');
+        await this.db.object('users/' + username + '/info').set(formData);
+      } else if (result.isValid == false) {
+        this.authService.errorMessage$.subscribe((errorMessage) => {
+          this.errorMessage = errorMessage;
+          console.log(errorMessage);
+        });
+        this.router.navigate(['./signup']);
+      }
+    });
   }
 
   switchToLogin() {
