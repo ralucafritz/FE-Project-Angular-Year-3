@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { Router } from '@angular/router';
 import { Observable, of, timeInterval, timeout } from 'rxjs';
+import { StorageWrapper } from 'src/app/StorageWrapper';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -13,8 +14,11 @@ import { AuthService } from 'src/app/services/auth.service';
 export class NavBarComponent implements OnInit {
   public userLoggedIn: boolean;
   public userName: string | null;
+  numberStreams = 0;
+  numberStreamsStorage = 0;
+  storageWrapper: StorageWrapper = StorageWrapper.getInstance("numberStreams");
+
   constructor(
-    public afAuth: AngularFireAuth,
     private router: Router,
     private db: AngularFireDatabase,
     public authService: AuthService
@@ -26,10 +30,24 @@ export class NavBarComponent implements OnInit {
   ngOnInit(): void {
     this.getStarted();
     this.authService.loggedInObservable.subscribe((subscriber) => {
-      this.changeStatus(subscriber); 
+      this.changeStatus(subscriber);
       console.log('subscriberNavBar called + ' + subscriber);
     });
     this.authService.checkStatusLogin();
+    this.storageListener();
+    this.storageWrapper.addEventListener(this.storageListener.bind(this));
+  }
+
+  storageListener() {
+    console.log("storagelistener");
+    const storedData = this.storageWrapper.getItem();
+    if (storedData === null) {
+      return;
+    }
+    this.numberStreamsStorage = JSON.parse(storedData);
+    if (this.numberStreamsStorage !== this.numberStreams) {
+      this.numberStreams = this.numberStreamsStorage;
+    }
   }
 
   changeStatus(status: boolean) {
@@ -42,14 +60,14 @@ export class NavBarComponent implements OnInit {
     } else {
       this.userName = '';
     }
-    console.log('changeStatus called + ' + this.userLoggedIn);
+    console.log('changeStatus navbar called + ' + this.userLoggedIn);
   }
 
   async getStarted() {
-    var details: string[];
+    let details: Array<string>;
     details = [];
     await this.getDetails().then((value) => {
-      details = value as string[];
+      details = value as Array<string>;
     });
   }
 
@@ -84,5 +102,4 @@ export class NavBarComponent implements OnInit {
   goToHome() {
     this.router.navigate(['./home']);
   }
-
 }

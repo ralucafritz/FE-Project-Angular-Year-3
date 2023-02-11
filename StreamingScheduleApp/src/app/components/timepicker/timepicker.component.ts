@@ -11,8 +11,8 @@ export class TimepickerComponent implements OnInit {
     minute: number;
   }>();
   time: Date = new Date();
-  hours: number[] = [];
-  minutes: number[] = [];
+  hours: Array<number> = [];
+  minutes: Array<number> = [];
   selectedHour: number = this.time.getHours();
   selectedMinute: number = this.time.getMinutes();
 

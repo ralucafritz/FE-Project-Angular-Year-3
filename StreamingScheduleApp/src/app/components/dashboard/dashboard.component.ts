@@ -4,6 +4,7 @@ import { TimepickerComponent } from '../timepicker/timepicker.component';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { Stream } from 'src/types';
+import { StorageWrapper } from 'src/app/StorageWrapper';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,12 +13,13 @@ import { Stream } from 'src/types';
 })
 export class DashboardComponent implements OnInit {
   addStreamForm!: FormGroup;
-  allStreams!: Stream[];
+  allStreams!: Array<Stream>;
   streamerName = '';
   streamDescription = '';
   needAlert = false;
   isSuccessful = false;
   alertMessage: string = '';
+  storageWrapper: StorageWrapper = StorageWrapper.getInstance("numberStreams");
 
   constructor(
     private db: AngularFireDatabase,
@@ -46,6 +48,12 @@ export class DashboardComponent implements OnInit {
       this.isSuccessful = true;
       this.triggerAlert();
       this.addStreamForm.reset();
+      const storedData = this.storageWrapper.getItem();
+      if (storedData === null) {
+        return;
+      }
+      const numberStreams = JSON.parse(storedData);
+      this.storageWrapper.setItem((numberStreams +1).toString())
     } else {
       this.isSuccessful = false;
       this.triggerAlert();

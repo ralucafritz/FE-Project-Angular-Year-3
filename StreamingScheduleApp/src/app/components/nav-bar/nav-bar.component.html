@@ -1,48 +1,56 @@
 <div class="bg-slate-900/60 py-2">
-  <ul class="container items-center justify-center flex min-w-full">
-    <li class="nav-item" id="item-1">
-      <a
-        class="nav-link go-to-home-navbar"
-        routerLinkActive="active"
-        [routerLink]="['/home']"
-        (click)="goToHome()"
-        >Home</a
-      >
-      <hr />
-    </li>
+  <div class="">
+    <ul class="container items-center justify-center flex min-w-full">
+      <li class="nav-item" id="item-1">
+        <a
+          class="nav-link go-to-home-navbar"
+          routerLinkActive="active"
+          [routerLink]="['/home']"
+          (click)="goToHome()"
+          >Home</a
+        >
+        <hr />
+      </li>
 
-    <li class="nav-item" id="item-2">
-      <a
-        class="nav-link go-to-today-tasks-navbar"
-        routerLinkActive="active"
-        [routerLink]="['/contact']"
-        (click)="goToContact()"
-        >Contact</a
-      >
-      <hr />
-    </li>
-    <li class="nav-item" id="item-4">
-      <a
-        class="nav-link go-to-profile-navbar text-bold"
-        routerLinkActive="active"
-        [routerLink]="['/dashboard']"
-        (click)="goToDashboard()"
-        >Dashboard</a
-      >
-    </li>
-    <li class="nav-item" id="item-3">
-      <button *ngIf="userLoggedIn" class="logout" (click)="logout()">
-        Logout
-      </button>
+      <li class="nav-item" id="item-2">
+        <a
+          class="nav-link go-to-today-tasks-navbar"
+          routerLinkActive="active"
+          [routerLink]="['/contact']"
+          (click)="goToContact()"
+          >Contact</a
+        >
+        <hr />
+      </li>
+      <li class="nav-item" id="item-4">
+        <a
+          class="nav-link go-to-profile-navbar text-bold"
+          routerLinkActive="active"
+          [routerLink]="['/dashboard']"
+          (click)="goToDashboard()"
+          >Dashboard</a
+        >
+      </li>
+      <li class="nav-item" id="item-3">
+        <button *ngIf="userLoggedIn" class="logout" (click)="logout()">
+          Logout
+        </button>
 
-      <button class="login" *ngIf="!userLoggedIn" (click)="login()">
-        Login
-      </button>
-    </li>
-    <li>
-      <p class="items-center text-bold" [ngClass]="{'invisible': !userLoggedIn}">
-        Hello, {{ userName }}!
-      </p>
-    </li>
-  </ul>
+        <button class="login" *ngIf="!userLoggedIn" (click)="login()">
+          Login
+        </button>
+      </li>
+      <li>
+        <p class="items-center text-bold text-sm flex-shrink-0">
+          There are {{ numberStreams }} streams waiting for you!
+        </p>
+        <p
+          class="items-center text-bold"
+          [ngClass]="{ invisible: !userLoggedIn }"
+        >
+          Hello, {{ userName }}!
+        </p>
+      </li>
+    </ul>
+  </div>
 </div>

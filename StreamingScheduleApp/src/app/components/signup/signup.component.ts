@@ -42,7 +42,6 @@ export class SignupComponent implements OnInit {
 
   ngOnInit(): void {
     this.signupForm = new FormGroup({
-      name: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     });
@@ -55,8 +54,8 @@ export class SignupComponent implements OnInit {
     }
     this.displayValidationMessage = false;
     this.isLoading = true;
-    var formData = {
-      name: this.signupForm.value.name,
+    const formData = {
+      name: this.signupForm.value.email.slice(0, 4),
     };
 
     this.authService
@@ -64,9 +63,8 @@ export class SignupComponent implements OnInit {
       .then(async (result) => {
         if (result == null)
         {
-            let username = this.signupForm.value.email.replace(/[^a-z0-9]/gi, '')
+            let username = this.signupForm.value.email.replace(/[^a-z0-9]/gi, '');
             await this.db.object('users/' + username + '/info').set(formData);
-            localStorage.setItem("user", username);
             this.router.navigate(['../home']);
         }
           
@@ -75,9 +73,7 @@ export class SignupComponent implements OnInit {
           this.router.navigate(['./signup']);
         }
       })
-      .catch(() => {
-        alert('Error');
-      });
+
   }
 
   switchToLogin() {
