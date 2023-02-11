@@ -18,16 +18,14 @@ export class HomeComponent implements OnInit {
   storageWrapper: StorageWrapper = StorageWrapper.getInstance('numberStreams');
   userLoggedIn: boolean = false;
 
+
   constructor(
     private db: AngularFireDatabase,
     public authService: AuthService
   ) {}
 
   ngOnInit(): void {
-    this.authService.loggedInObservable.subscribe((subscriber) => {
-      this.changeStatus(subscriber);
-      console.log('subscriberHome called + ' + subscriber);
-    });
+    console.log(`${this.userLoggedIn} LOGGED IN_________________________________`);
 
     this.db
       .list('streamList')
@@ -40,11 +38,6 @@ export class HomeComponent implements OnInit {
         this.numberStreams = this.keyArray.length;
         this.storageWrapper.setItem(this.numberStreams.toString());
       });
-  }
-
-  changeStatus(status: boolean) {
-    this.userLoggedIn = status;
-    console.log('changeStatus home called + ' + this.userLoggedIn);
   }
 
   goToStreamLink(name: string): void {

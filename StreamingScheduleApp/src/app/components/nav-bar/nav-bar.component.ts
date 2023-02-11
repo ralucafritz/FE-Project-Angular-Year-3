@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { Router } from '@angular/router';
@@ -12,20 +12,18 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./nav-bar.component.scss'],
 })
 export class NavBarComponent implements OnInit {
-  public userLoggedIn: boolean;
-  public userName: string | null;
+  public userLoggedIn: boolean = false;
+  @Output() isLoggedInEvent = new EventEmitter<boolean>();
+  public userName: string | null = '';
   numberStreams = 0;
   numberStreamsStorage = 0;
-  storageWrapper: StorageWrapper = StorageWrapper.getInstance("numberStreams");
+  storageWrapper: StorageWrapper = StorageWrapper.getInstance('numberStreams');
 
   constructor(
     private router: Router,
     private db: AngularFireDatabase,
     public authService: AuthService
-  ) {
-    this.userLoggedIn = false;
-    this.userName = '';
-  }
+  ) {}
 
   ngOnInit(): void {
     this.getStarted();
@@ -39,7 +37,7 @@ export class NavBarComponent implements OnInit {
   }
 
   storageListener() {
-    console.log("storagelistener");
+    console.log('storagelistener');
     const storedData = this.storageWrapper.getItem();
     if (storedData === null) {
       return;
@@ -52,6 +50,7 @@ export class NavBarComponent implements OnInit {
 
   changeStatus(status: boolean) {
     this.userLoggedIn = status;
+    this.checkLoggedInEvent(status);
     if (status) {
       this.userName = localStorage.getItem('user');
       if (this.userName !== null && this.userName.length >= 4) {
@@ -80,6 +79,12 @@ export class NavBarComponent implements OnInit {
           resolve(value);
         });
     });
+  }
+
+  checkLoggedInEvent(status: boolean){
+    this.isLoggedInEvent.emit(status);
+    console.log(`checkLoggedInEvent - ${status}`);
+    
   }
 
   logout(): void {

@@ -1,5 +1,6 @@
 <div class="py-5">
-  <h2 class="text-[40px] text-center text-gray-50 font-bold mb-5 ">
+  <app-nav-bar class="hidden" (isLoggedInEvent)="userLoggedIn=$event"></app-nav-bar>
+  <h2 class="text-[40px] text-center text-gray-50 font-bold mb-5">
     Upcoming Streams
   </h2>
   <div class="flex justify-center text-xl mt-2">
@@ -16,12 +17,17 @@
               <div
                 class="block p-6 rounded-lg shadow-lg bg-gray-700/70 max-w-md ml-6 mb-10"
               >
-                <div class="flex justify-between mb-4 ">
+                <div class="flex justify-between mb-4">
                   <a
-                    class="text-2xl font-medium uppercase text-purple-400 hover:text-purple-500 focus:text-purple-600 duration-300 transition ease-in-out "
+                    class="text-2xl font-medium uppercase text-purple-400 hover:text-purple-500 focus:text-purple-600 duration-300 transition ease-in-out"
                     >{{ allStreams[key]?.streams.streamerName }}</a
                   >
-                  <span class="text-gray-50 cursor-pointer" *ngIf="userLoggedIn" (click)="deleteStream(key)">X</span>
+                  <span
+                    class="text-gray-50 cursor-pointer"
+                    *ngIf="userLoggedIn"
+                    (click)="deleteStream(key)"
+                    >X</span
+                  >
                 </div>
                 <p class="text-gray-50 mb-6">
                   {{ allStreams[key]?.streams.streamDescription }}
@@ -30,7 +36,9 @@
                   type="button"
                   class="inline-block px-4 py-1.5 text-[17px] bg-purple-600 text-white font-medium text-xs leading-tight uppercase rounded hover:scale-125 shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-800 active:shadow-lg transition duration-150 ease-in-out"
                   data-mdb-ripple="true"
-                  (click)="goToStreamLink(allStreams[key]?.streams.streamerName)"
+                  (click)="
+                    goToStreamLink(allStreams[key]?.streams.streamerName)
+                  "
                 >
                   <i class="fab fa-twitch"></i>
                   WATCH STREAM
