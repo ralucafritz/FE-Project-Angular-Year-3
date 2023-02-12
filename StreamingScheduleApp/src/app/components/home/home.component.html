@@ -1,5 +1,10 @@
+<app-alerts
+[needAlert]="needAlert"
+[isSuccessful]="isSuccessful"
+[alertMessage]="alertMessage"></app-alerts>
+
 <div class="py-5">
-  <app-nav-bar class="hidden" (isLoggedInEvent)="userLoggedIn=$event"></app-nav-bar>
+  <app-nav-bar class="hidden relative" (isLoggedInEvent)="userLoggedIn=$event"></app-nav-bar>
   <h2 class="text-[40px] text-center text-gray-50 font-bold mb-5">
     Upcoming Streams
   </h2>

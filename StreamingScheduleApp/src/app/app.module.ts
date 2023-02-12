@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -17,16 +16,27 @@ import { FooterComponent } from './components/footer/footer.component';
 import { TimepickerComponent } from './components/timepicker/timepicker.component';
 import { AlertsComponent } from './components/alerts/alerts.component';
 import { AuthErrorsHelperComponent } from './helpers/auth-errors-helper/auth-errors-helper.component';
-import { AlertsHelperComponent } from './helpers/alerts-helper/alerts-helper.component';
 
 @NgModule({
-  declarations: [AppComponent, NavBarComponent, HomeComponent, ContactComponent, DashboardComponent, LoginComponent, SignupComponent, FooterComponent, TimepickerComponent, AlertsComponent, AuthErrorsHelperComponent, AlertsHelperComponent],
+  declarations: [
+    AppComponent,
+    NavBarComponent,
+    HomeComponent,
+    ContactComponent,
+    DashboardComponent,
+    LoginComponent,
+    SignupComponent,
+    FooterComponent,
+    TimepickerComponent,
+    AlertsComponent,
+    AuthErrorsHelperComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    AngularFireModule.initializeApp(environment.firebase),  
+    AngularFireModule.initializeApp(environment.firebase),
   ],
   providers: [],
   bootstrap: [AppComponent, NavBarComponent, FooterComponent],
